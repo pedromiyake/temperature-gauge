@@ -1,0 +1,20 @@
+<div class="gauge-container">
+  <div class="gauge__background">
+    <div class="gauge__pointer gauge__pointer--min"></div>
+    <div class="gauge__pointer gauge__pointer--max"></div>
+  </div>
+  <div class="gauge__circle">
+    <div class="gauge__pointer" [ngStyle]="{'transform': 'rotate('+pointerAngle+'deg)'}"></div>
+  </div>
+</div>
+
+<div *ngIf="!errorMessage; else errorMessageBlock" class="temperature">
+  {{ temperatureConfig.currentTemp }} 
+  <span>&#176;</span>
+  C
+</div>
+<ng-template #errorMessageBlock>
+  <div class="error">
+    {{ errorMessage }}
+  </div>
+</ng-template>

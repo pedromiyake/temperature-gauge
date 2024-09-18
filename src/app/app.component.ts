@@ -1,13 +1,38 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
+import {FormGroup, FormControl, ReactiveFormsModule} from '@angular/forms';
+import { GaugeComponent } from "./components/gauge/gauge.component";
+import { TemperatureConfig } from './models/temperature-config';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet],
+  imports: [RouterOutlet, GaugeComponent, ReactiveFormsModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   title = 'temepature-gauge';
+
+  temperatureConfig: TemperatureConfig = {
+    minTemp: 0,
+    maxTemp: 100,
+    currentTemp: 20
+  };
+
+  form = new FormGroup({
+    minTemp: new FormControl(this.temperatureConfig?.minTemp),
+    maxTemp: new FormControl(this.temperatureConfig?.maxTemp),
+    currentTemp: new FormControl(this.temperatureConfig?.currentTemp)
+  });
+
+  ngOnInit() {
+    this.form.valueChanges.subscribe(changes => {
+      this.temperatureConfig = {
+        minTemp: changes.minTemp as number,
+        maxTemp: changes.maxTemp as number,
+        currentTemp: changes.currentTemp as number
+      };
+    });
+  }
 }

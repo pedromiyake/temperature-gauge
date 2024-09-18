@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import {FormGroup, FormControl, ReactiveFormsModule} from '@angular/forms';
+import { FormGroup, FormControl, ReactiveFormsModule } from '@angular/forms';
 import { GaugeComponent } from "./components/gauge/gauge.component";
 import { TemperatureConfig } from './models/temperature-config';
 import { Subject, takeUntil } from 'rxjs';
